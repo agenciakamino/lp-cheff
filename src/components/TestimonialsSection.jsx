@@ -1,8 +1,17 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import MagneticButton from './MagneticButton'; // Importando o botão magnético
+import MagneticButton from './MagneticButton'; 
+import mariaImage from '../assets/images/maria.jpg';
+import ricardoImage from '../assets/images/ricardo.jpg';
+import ricardoAlvesImage from '../assets/images/ricardo-alves.jpg';
+import dishImage from '../assets/images/depoimento.jpg';
+import mariaAvatar from '../assets/images/maria-perfil.png';
+import ricardoAlmeidaAvatar from '../assets/images/ricardo-almeida-perfil.png';
+import ricardoAlvesAvatar from '../assets/images/ricardo-alves-perfil.png';
+import camilaAvatar from '../assets/images/camila-perfil.png';
 
 // === DADOS DOS DEPOIMENTOS ===
+// AJUSTE DE ALTURA: Aumentei o min-h para lg:min-h-[450px] para garantir imagens grandes
 const columns = [
   // COLUNA 1
   {
@@ -10,14 +19,15 @@ const columns = [
     items: [
       {
         type: 'image',
-        src: 'https://images.unsplash.com/photo-1556910103-1c02745a30bf?auto=format&fit=crop&q=80&w=600',
-        alt: 'Chef finalizando prato'
+        src: mariaImage,
+        alt: 'Chef maçaricando sobremesa',
+        className: 'flex-1 h-full w-full min-h-[300px] lg:min-h-[450px]' 
       },
       {
         type: 'feedback',
         name: "Maria Fernandes",
         role: "Cozinha por Hobby",
-        avatar: "https://randomuser.me/api/portraits/women/44.jpg",
+        avatar: mariaAvatar,
         text: "Comecei cozinhando como uma forma de relaxar e acabei descobrindo uma nova paixão. As aulas são leves e inspiradoras!"
       }
     ]
@@ -30,13 +40,14 @@ const columns = [
         type: 'feedback',
         name: "Ricardo Almeida",
         role: "Chefe de Cozinha",
-        avatar: "https://randomuser.me/api/portraits/men/32.jpg",
+        avatar: ricardoAlmeidaAvatar,
         text: "Excelente. O curso é prático, os professores são chefs de mercado e a estrutura é impecável. Saí pronto para os desafios reais da profissão."
       },
       {
         type: 'image',
-        src: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&q=80&w=600',
-        alt: 'Prato Gourmet'
+        src: ricardoImage,
+        alt: 'Chef preparando pães e hambúrgueres',
+        className: 'flex-1 h-full w-full min-h-[300px] lg:min-h-[450px]'
       }
     ]
   },
@@ -46,14 +57,15 @@ const columns = [
     items: [
       {
         type: 'image',
-        src: 'https://images.unsplash.com/photo-1583394293214-28ded15ee548?auto=format&fit=crop&q=80&w=600',
-        alt: 'Chef preparando massa'
+        src: ricardoAlvesImage,
+        alt: 'Tortinhas de morango com chantilly',
+        className: 'flex-1 h-full w-full min-h-[300px] lg:min-h-[450px]'
       },
       {
         type: 'feedback',
         name: "Ricardo Alves",
         role: "Chefe de Cozinha",
-        avatar: "https://randomuser.me/api/portraits/men/64.jpg",
+        avatar: ricardoAlvesAvatar,
         text: "O curso mudou totalmente minha visão sobre gastronomia. Professores excelentes e um ambiente acolhedor."
       }
     ]
@@ -66,13 +78,14 @@ const columns = [
         type: 'feedback',
         name: "Camila Duarte",
         role: "Panificação e Confeitaria",
-        avatar: "https://randomuser.me/api/portraits/women/65.jpg",
+        avatar: camilaAvatar,
         text: "Aprendi técnicas que hoje uso no meu próprio negócio. Cada aula foi uma experiência única!"
       },
       {
         type: 'image',
-        src: 'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&q=80&w=600',
-        alt: 'Cupcakes decorados'
+        src: dishImage,
+        alt: 'Prato com carne ao molho e purê',
+        className: 'flex-1 h-full w-full min-h-[300px] lg:min-h-[450px]'
       }
     ]
   }
@@ -80,7 +93,7 @@ const columns = [
 
 // === COMPONENTE DO CARD DE TEXTO ===
 const FeedbackCard = ({ data }) => (
-  <div className="bg-[#EAE0D5] p-6 rounded-[20px] flex flex-col gap-4 shadow-lg h-fit">
+  <div className="bg-[#EAE0D5] p-6 rounded-[20px] flex flex-col gap-4 shadow-lg h-fit shrink-0">
     <div className="flex items-center gap-3">
       <div className="w-10 h-10 rounded-full overflow-hidden border border-white/50 shadow-sm shrink-0">
         <img src={data.avatar} alt={data.name} className="w-full h-full object-cover" />
@@ -97,12 +110,12 @@ const FeedbackCard = ({ data }) => (
 );
 
 // === COMPONENTE DA IMAGEM ===
-const ImageCard = ({ src, alt }) => (
-  <div className="relative w-full aspect-[3/4] rounded-[20px] overflow-hidden group">
+const ImageCard = ({ src, alt, className }) => (
+  <div className={`relative rounded-[20px] overflow-hidden group ${className}`}>
     <img 
       src={src} 
       alt={alt} 
-      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+      className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
     />
     <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors duration-300"></div>
   </div>
@@ -131,7 +144,6 @@ function TestimonialsSection() {
                   whileInView={{ width: '100%' }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.5, duration: 0.8 }}
-                  // Correção do sublinhado para não cortar o texto
                   className="absolute -bottom-2 left-0 h-[3px] bg-[#D62828]"
                 ></motion.span>
               </span>
@@ -147,7 +159,6 @@ function TestimonialsSection() {
             </motion.p>
           </div>
 
-          {/* === BOTÃO MAGNÉTICO (Consistência com o resto do site) === */}
           <motion.div
              initial={{ opacity: 0, scale: 0.9 }}
              whileInView={{ opacity: 1, scale: 1 }}
@@ -159,7 +170,7 @@ function TestimonialsSection() {
           </motion.div>
         </div>
 
-        {/* === GRID PERFEITO (4 Colunas Independentes) === */}
+        {/* === GRID === */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           
           {columns.map((col, index) => (
@@ -169,12 +180,12 @@ function TestimonialsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "0px 0px -100px 0px" }}
               transition={{ delay: index * 0.1, duration: 0.8, ease: "easeOut" }}
-              className="flex flex-col gap-6" 
+              className="flex flex-col gap-6 h-full" 
             >
               {col.items.map((item, i) => (
-                <div key={i} className="w-full">
+                <div key={i} className={`w-full ${item.type === 'image' ? 'flex-1 flex flex-col' : ''}`}>
                   {item.type === 'image' ? (
-                    <ImageCard src={item.src} alt={item.alt} />
+                    <ImageCard src={item.src} alt={item.alt} className={item.className} />
                   ) : (
                     <FeedbackCard data={item} />
                   )}
