@@ -81,11 +81,11 @@ function Footer() {
               </li>
               <li className="flex items-center gap-3 text-gray-300 font-light hover:text-white transition-colors">
                 <Icons.Mail />
-                <span>contato@cheffinstituto.com.br</span>
+                <span>cheffinstitutogastronomico@gmail.com</span>
               </li>
               <li className="flex items-start gap-3 text-gray-300 font-light hover:text-white transition-colors">
                 <Icons.MapPin />
-                <span className="leading-tight">Av. Paulista, 1000 – São Paulo/SP</span>
+                <span className="leading-tight">Rua Reinoldo Rau n 565 - Centro de Jaraguá do Sul</span>
               </li>
             </ul>
           </div>

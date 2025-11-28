@@ -22,16 +22,8 @@ const iconMap = {
   junior: juniorIcon,
 };
 
-// Ícones com desenho menor recebem tamanho extra para equilibrar visualmente
-const iconSizeMap = {
-  bread: "w-20 h-20",
-  grill: "w-20 h-20",
-  pizza: "w-20 h-20",
-};
-
-
 // =========================================
-// DADOS (Agora muito mais limpos)
+// DADOS
 // =========================================
 const courses = [
   {
@@ -113,7 +105,6 @@ const courses = [
 // =========================================
 function CoursesSection() {
   
-  // Variante para a animação de entrada suave
   const fadeUpVariant = {
     hidden: { opacity: 0, y: 40 },
     visible: { 
@@ -127,7 +118,7 @@ function CoursesSection() {
     <section id="cursos" className="w-full py-24 bg-[#080808]">
       <div className="container mx-auto px-6 md:px-8">
         
-        {/* Título Centralizado (Mantive a animação original que estava boa) */}
+        {/* Título Centralizado */}
         <div className="text-center mb-16 md:mb-20">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
@@ -159,34 +150,26 @@ function CoursesSection() {
         {/* Grid de Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {courses.map((course, index) => {
-            // Seleciona o componente de ícone correto baseado no nome
             const iconSrc = iconMap[course.iconName];
 
             return (
               <motion.div 
                 key={course.id}
-                // AQUI ESTÁ A MUDANÇA NA ANIMAÇÃO:
-                // Aplicamos a animação individualmente em cada card.
                 variants={fadeUpVariant}
                 initial="hidden"
                 whileInView="visible"
-                // viewport={{ once: true, margin: "-100px" }} garante que o card
-                // só anima quando já está bem dentro da tela (100px a partir de baixo)
                 viewport={{ once: true, margin: "0px 0px -100px 0px" }}
-                // Adicionamos um delayzinho baseado no índice para que cards na mesma linha
-                // não apareçam exatamente ao mesmo tempo, criando uma "onda" sutil.
                 transition={{ delay: (index % 3) * 0.1 }}
                 className="flex flex-col p-8 md:p-10 rounded-[2rem] border border-[#D62828] bg-transparent hover:bg-white/5 transition-colors duration-500"
               >
                 {/* Ícone + Título */}
                 <div className="flex flex-col items-start gap-4 mb-6">
                   <div className="p-0">
-                    {/* Renderiza o ícone em PNG */}
                     {iconSrc ? (
                       <img
                         src={iconSrc}
                         alt={`Ícone do curso ${course.title}`}
-                        className={`${iconSizeMap[course.iconName] || 'w-16 h-16'} object-contain`}
+                        className="w-16 h-16 object-contain"
                       />
                     ) : null}
                   </div>
